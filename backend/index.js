@@ -10,8 +10,6 @@ app.use(bodyParser.json());
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'tanishq$12',
-  database: 'flashcard_db',
 });
 
 db.connect((err) => {
@@ -35,7 +33,7 @@ app.get('/api/flashcards', (req, res) => {
       res.status(201).send('Flashcard added');
     });
   });
-  
+
   // Update a flashcard
   app.put('/api/flashcards/:id', (req, res) => {
     const { id } = req.params;

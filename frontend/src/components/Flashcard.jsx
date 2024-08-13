@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
 
-const FlipCard = () => {
+const Flashcard = ({ flashcard }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleMouseEnter = () => {
@@ -12,29 +12,33 @@ const FlipCard = () => {
     setIsFlipped(false);
   };
 
+  if (!flashcard) {
+    return <p>No flashcard data available.</p>;
+  }
+
   return (
-    <div className="flip-card-container">
+    <div className="flex items-center justify-center  p-4">
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
+        {/* Front Card */}
         <div
-          className="front"
+          className="w-96 h-64 bg-gradient-to-r from-green-300 to-green-500 flex items-center justify-center rounded-lg shadow-lg cursor-pointer transition-transform transform hover:scale-105"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          style={{ width: '300px', height: '200px', background: '#d7fbda', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.2)' }}
         >
-          <h1>This is the front card</h1>
+          <h1 className="text-2xl font-bold text-gray-800 text-center">{flashcard.question}</h1>
         </div>
 
+        {/* Back Card */}
         <div
-          className="back"
+          className="w-96 h-64 bg-gradient-to-r from-pink-300 to-pink-500 flex items-center justify-center rounded-lg shadow-lg cursor-pointer transition-transform transform hover:scale-105"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          style={{ width: '300px', height: '200px', background: '#fbd7f8', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.2)' }}
         >
-          <h1>This is the back card</h1>
+          <h1 className="text-2xl font-bold text-gray-800 text-center">{flashcard.answer}</h1>
         </div>
       </ReactCardFlip>
     </div>
   );
 };
 
-export default FlipCard;
+export default Flashcard;
